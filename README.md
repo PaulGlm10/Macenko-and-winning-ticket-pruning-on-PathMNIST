@@ -1,0 +1,1 @@
+# Data-augmentation-and-winning-ticket-pruning-on-PathMNIST
