@@ -71,11 +71,11 @@ La méthode de **Macenko** vise à réduire ces variations en ramenant les color
 
 La méthode travaille dans l'espace de densité optique (*Optical Density*, OD). Pour un pixel RGB, la transformation utilisée est :
 
-\[
+$
 OD = -\log\left(\frac{I+1}{255}\right)
-\]
+$
 
-où \(I\) représente l'intensité du pixel.
+où $I$ représente l'intensité du pixel.
 
 Les principales étapes de l'implémentation sont :
 
