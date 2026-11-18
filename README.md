@@ -71,9 +71,7 @@ La méthode de **Macenko** vise à réduire ces variations en ramenant les color
 
 La méthode travaille dans l'espace de densité optique (*Optical Density*, OD). Pour un pixel RGB, la transformation utilisée est :
 
-$
-OD = -\log\left(\frac{I+1}{255}\right)
-$
+$OD = -\log\left(\frac{I+1}{255}\right)$
 
 où $I$ représente l'intensité du pixel.
 
@@ -133,7 +131,7 @@ Le modèle étudié est un CNN composé de :
 - une couche entièrement connectée de 256 neurones ;
 - une couche de sortie de neuf neurones.
 
-Les convolutions utilisent des noyaux \(3 \times 3\). Les images d'entrée sont au format \(3 \times 28 \times 28\).
+Les convolutions utilisent des noyaux $3x3$. Les images d'entrée sont au format $3x28x28$.
 
 ### 3.3 Entraînement initial
 
