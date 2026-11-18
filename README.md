@@ -78,9 +78,9 @@ où $I$ représente l'intensité du pixel.
 Les principales étapes de l'implémentation sont :
 
 1. **Passage en densité optique** : conversion des pixels RGB en valeurs OD.
-2. **Sélection des pixels de tissu** : exclusion des pixels dont la norme OD est inférieure au seuil \(\beta = 0.15\).
+2. **Sélection des pixels de tissu** : exclusion des pixels dont la norme OD est inférieure au seuil $beta = 0.15$.
 3. **Estimation des colorations** : calcul de la matrice de covariance des pixels OD, puis projection sur le plan défini par les deux principaux vecteurs propres.
-4. **Estimation des deux directions de coloration** : calcul des angles des pixels projetés et sélection des quantiles \(\alpha = 1\%\) et \(99\%\).
+4. **Estimation des deux directions de coloration** : calcul des angles des pixels projetés et sélection des quantiles $alpha = 1%$ et $99%$.
 5. **Estimation des concentrations** : résolution des concentrations associées aux deux colorations.
 6. **Normalisation** : mise à l'échelle des concentrations à partir du percentile 99, puis reconstruction de l'image RGB avec la matrice de coloration cible.
 
@@ -149,10 +149,10 @@ L'entraînement s'arrête lorsque la perte de validation ne s'améliore plus pen
 
 Un tour d'élagage suit les étapes suivantes :
 
-1. Entraîner le réseau masqué \(m \odot \theta_0\), où \(\theta_0\) désigne l'initialisation initiale et \(m\) le masque courant.
+1. Entraîner le réseau masqué $m \odot theta_0$, où $theta_0$ désigne l'initialisation initiale et $m$ le masque courant.
 2. Récupérer le meilleur checkpoint selon la perte de validation.
 3. Appliquer un élagage par magnitude : retirer les poids de plus faible valeur absolue, couche par couche.
-4. Réinitialiser les poids encore présents à leurs valeurs dans \(\theta_0\).
+4. Réinitialiser les poids encore présents à leurs valeurs dans $theta_0$.
 5. Recommencer l'entraînement avec le nouveau masque.
 
 L'élagage est non structuré et réalisé couche par couche. À chaque tour, le taux de retrait des poids vivants est de :
@@ -165,21 +165,21 @@ Les poids déjà élagués ne peuvent pas être sélectionnés à nouveau. Le ma
 
 ### 3.5 Contrôle par réinitialisation indépendante
 
-Pour vérifier que les performances du sous-réseau viennent bien de l'initialisation initiale \(\theta_0\), un contrôle est réalisé :
+Pour vérifier que les performances du sous-réseau viennent bien de l'initialisation initiale $theta_0$, un contrôle est réalisé :
 
 - on conserve le masque du ticket sélectionné ;
 - on entraîne ce même sous-réseau avec une autre initialisation (graine initiale + 1000) ;
 - les données et l'ordre des batchs restent identiques.
 
-Si le ticket initialisé avec \(\theta_0\) obtient de meilleurs résultats que ce contrôle, cela soutient l'hypothèse que l'initialisation d'origine joue un rôle important.
+Si le ticket initialisé avec $theta_0$ obtient de meilleurs résultats que ce contrôle, cela soutient l'hypothèse que l'initialisation d'origine joue un rôle important.
 
 ### 3.6 Choix du niveau d'élagage
 
-Le niveau \(P_m^*\) est sélectionné séparément pour les deux branches à partir de la validation (graine 0), sans consulter les jeux de test. La règle choisit la meilleure exactitude de validation ; si plusieurs niveaux sont à moins de 0,5 point du meilleur, le niveau le plus élagué est retenu.
+Le niveau $P_m^*$ est sélectionné séparément pour les deux branches à partir de la validation (graine 0), sans consulter les jeux de test. La règle choisit la meilleure exactitude de validation ; si plusieurs niveaux sont à moins de 0,5 point du meilleur, le niveau le plus élagué est retenu.
 
 Les niveaux retenus dans l'exécution du notebook sont :
 
-| Branche | Tour sélectionné \(n^*\) | Poids conservés \(P_m^*\) |
+| Branche | Tour sélectionné $n^*$ | Poids conservés $P_m^*$ |
 |---|---:|---:|
 | Images originales | 12 | 10,6 % |
 | Macenko | 10 | 15,2 % |
@@ -246,7 +246,7 @@ La comparaison des résultats sur le test même centre et sur le test autre cent
 
 ![Scores selon le pourcentage de poids conservés](readme_assets/scores_vs_sparsity.png)
 
-Les courbes selon \(P_m\) sont descriptives : le niveau \(P_m^*\) est choisi sur la validation, et non sur les tests. Les performances de test ne sont donc pas utilisées pour sélectionner le ticket.
+Les courbes selon $P_m$ sont descriptives : le niveau $P_m^*$ est choisi sur la validation, et non sur les tests. Les performances de test ne sont donc pas utilisées pour sélectionner le ticket.
 
 ### 4.6 Synthèse
 
